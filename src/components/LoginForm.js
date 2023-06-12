@@ -11,8 +11,7 @@ const LoginForm = () => {
 			loginEmployee();
 			localStorage.setItem("isManager", false);
 			localStorage.setItem("isLogin", true);
-		}
-		if (username === "manager01@test.ru" && password === "manager01") {
+		} else if (username === "manager01@test.ru" && password === "manager01") {
 			loginManager();
 			localStorage.setItem("isManager", true);
 			localStorage.setItem("isLogin", true);
