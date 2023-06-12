@@ -15,6 +15,8 @@ const LoginForm = () => {
 			loginManager();
 			localStorage.setItem("isManager", true);
 			localStorage.setItem("isLogin", true);
+		} else {
+			alert("Nhập sai thông tin");
 		}
 	};
 	useEffect(() => {
