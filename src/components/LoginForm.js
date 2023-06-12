@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import QuanLy from "./QuanLy";
-import NhanVien from "./NhanVien";
-import { Link } from "react-router-dom";
 import "../Login.css";
 
 const LoginForm = () => {
