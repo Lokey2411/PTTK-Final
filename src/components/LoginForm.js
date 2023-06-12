@@ -10,14 +10,17 @@ const LoginForm = () => {
 		if (username === "employee99@test.ru" && password === "employee99") {
 			loginEmployee();
 			localStorage.setItem("isManager", false);
+			localStorage.setItem("isLogin", true);
 		}
 		if (username === "manager01@test.ru" && password === "manager01") {
 			loginManager();
 			localStorage.setItem("isManager", true);
+			localStorage.setItem("isLogin", true);
 		}
 	};
 	useEffect(() => {
 		localStorage.setItem("isManager", false);
+		localStorage.setItem("isLogin", false);
 	});
 
 	return (

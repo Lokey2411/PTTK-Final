@@ -14,9 +14,7 @@ const App = () => {
 				<Route
 					path="/QuanLy"
 					exact
-					element={
-						<QuanLy isManager={localStorage.getItem("isManager")} />
-					}></Route>
+					element={<QuanLy />}></Route>
 				<Route
 					path="/NhanVien"
 					exact
