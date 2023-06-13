@@ -3,6 +3,7 @@ import NavbarItem from "../NavbarItem";
 import SignOutButton from "../SignOutButton";
 import Container from "./Container";
 import EmployeeAddModal from "./EmployeeAddModal";
+import { isManager } from "../Local";
 
 const Manager = () => (
 	<div className="h-screen">
@@ -10,7 +11,10 @@ const Manager = () => (
 			<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
 				<div className="flex  w-2/3 h-fit">
 					<NavbarItem content="Chờ duyệt" />
-					<NavbarItem content="Đang làm" />
+					<NavbarItem
+						content="Đang làm"
+						Navigate={() => (window.location = "./DangLam")}
+					/>
 					<NavbarItem content="Hoàn thành" />
 				</div>
 				<SignOutButton />
@@ -47,11 +51,7 @@ const Employee = () => {
 };
 
 const Home = () => {
-	return JSON.parse(localStorage.getItem("isManager")) ? (
-		<Manager />
-	) : (
-		<Employee />
-	);
+	return isManager ? <Manager /> : <Employee />;
 };
 
 export default Home;
