@@ -5,45 +5,56 @@ import SignOutButton from "../SignOutButton";
 import { isEmployee, isManager } from "../Local";
 
 const ManagerDoing = () => (
-	<div>
+	<div className="h-screen">
 		<div className="flex justify-end max-h-1/50">
 			<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
-				<div className="flex  w-1/2 h-fit">
+				<div className="flex  w-3/4 h-fit">
 					<NavbarItem
 						content="Đang làm"
 						Navigate={() => (window.location = "./DangLam")}
 					/>
 					<NavbarItem content="Hoàn thành" />
+					<NavbarItem
+						content="Trang Chủ"
+						Navigate={() => (window.location = "./QuanLy")}
+					/>
 				</div>
 				<SignOutButton />
 			</div>
 		</div>
-		<div>
-			<TodoItem listItem={""} />
+		<div className="bg-gradient-to-r from-purple-500 to-pink-500 h-[88%] w-screen p-7">
+			<TodoItem
+				listItem={"ccc"}
+				css={"w-1/2"}
+			/>
 		</div>
 	</div>
 );
 
 const EmployeeDoing = () => (
-	<div>
+	<div className="h-screen">
 		<div className="flex justify-end max-h-1/50">
 			<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
-				<div className="flex  w-1/2 h-fit">
+				<div className="flex  w-3/4 h-fit">
 					<NavbarItem
 						content="Đang làm"
 						Navigate={() => (window.location = "./DangLam")}
 					/>
 					<NavbarItem content="Hoàn thành" />
+					<NavbarItem
+						content="Trang Chủ"
+						Navigate={() => (window.location = "./NhanVien")}
+					/>
 				</div>
 				<SignOutButton />
 			</div>
 		</div>
-		<div>
+		<div className="bg-gradient-to-r from-purple-500 to-pink-500 h-[88%] w-screen p-7">
 			<FunctionDatabase
 				item={"Thêm việc"}
 				css="ml-10 mb-6"
 			/>
-			<TodoItem listItem={""} />
+			<TodoItem listItem={"ccc"} />
 		</div>
 	</div>
 );
@@ -56,8 +67,9 @@ const FunctionDatabase = ({ item, functionRef, css }) => (
 	</div>
 );
 
-const TodoItem = ({ listItem }) => (
-	<div className="flex items-center align-middle justify-between w-4/6 ml-10">
+const TodoItem = ({ listItem, css }) => (
+	<div
+		className={`flex items-center align-middle justify-between w-4/6 ml-10 ${css}`}>
 		<div className="w-1/2 bg-gray-200 py-4 px-2 ">{listItem}</div>
 		<input
 			type="checkbox"
