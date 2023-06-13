@@ -30,6 +30,7 @@ const LoginForm = () => {
 			<input
 				type="text"
 				id="username"
+				className="text"
 			/>
 			<br />
 			<br />
@@ -37,6 +38,7 @@ const LoginForm = () => {
 			<input
 				type="password"
 				id="password"
+				className="password"
 			/>
 			<br />
 			<br />
