@@ -1,4 +1,6 @@
+import { child, push, ref, update } from "firebase/database";
 import Function from "./Home/Function";
+import { database } from "./Firebase";
 
 export const isManager = JSON.parse(localStorage.getItem("isManager"));
 export const isLogin = JSON.parse(localStorage.getItem("isLogin"));
@@ -43,3 +45,26 @@ export const Confirm = () => (
 		<option value={false}>No</option>
 	</select>
 );
+export function writeNewPost(uid, username, picture, title, body) {
+	const db = database();
+
+	// A post entry.
+	const postData = {
+		author: username,
+		uid: uid,
+		body: body,
+		title: title,
+		starCount: 0,
+		authorPic: picture,
+	};
+
+	// Get a key for a new Post.
+	const newPostKey = push(child(ref(db), "posts")).key;
+
+	// Write the new post's data simultaneously in the posts list and the user's post list.
+	const updates = {};
+	updates["/posts/" + newPostKey] = postData;
+	updates["/user-posts/" + uid + "/" + newPostKey] = postData;
+
+	return update(ref(db), updates);
+}
