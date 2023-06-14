@@ -1,28 +1,34 @@
 import React from "react";
 import Container from "./Container";
 import EmployeeAddModal from "./EmployeeAddModal";
-import { isManager } from "../Local";
+import { isManager, openModal } from "../Local";
 import Doing from "../Doing/Doing";
+import Looking from "../Manager/Looking";
+import ConfirmProject from "../Manager/ConfirmProject";
 
 const Manager = () => (
 	<div className="h-screen">
-		<Container functions={["Xét duyệt", "Tiến độ", "Hoàn thành"]} />
+		<Container
+			functions={[
+				"Xét duyệt dự án",
+				"Xác nhận hoàn thành dự án",
+				"Danh sách các dự án hoàn thành",
+			]}
+			Function1={() => openModal("js-Looking-modal")}
+			Function2={() => openModal("js-confirm-modal")}
+		/>
+		<Looking />
+		<ConfirmProject />
 	</div>
 );
 const Employee = () => {
-	const addFunction = () => {
-		document.getElementById("js-EmployeeAddModal").classList.remove("hidden");
-	};
-	const showReportModal = () => {
-		document.getElementById("js-doing-modal").classList.remove("hidden");
-	};
 	return (
 		<div className="h-screen fadein flex">
 			<Container
 				functions={["Thêm dự án", "Nộp công việc \n dự án"]}
-				Function1={addFunction}
-				Function3={showReportModal}
-				Function2={showReportModal}
+				Function1={() => openModal("js-EmployeeAddModal")}
+				Function3={() => openModal("js-doing-modal")}
+				Function2={() => openModal("js-doing-modal")}
 			/>
 			<EmployeeAddModal />
 			<Doing />

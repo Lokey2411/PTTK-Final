@@ -6,7 +6,8 @@ import SignOutButton from "../SignOutButton";
 const Container = ({ functions, Function1, Function2, Function3 }) => {
 	return (
 		<div className=" bg-gradient-to-r from-red-500 to-sky-500 h-screen w-screen items-center">
-			<div className="">
+			<div className="flex justify-center">
+				<p className="w-full text-8xl text-center">Trang chủ</p>
 				<SignOutButton />
 			</div>
 			<div className="flex justify-around items-center ">

@@ -1,6 +1,6 @@
 import React from "react";
 import { NotLogin } from "../NhanVien";
-import { isEmployee, isManager } from "../Local";
+import { BackButtons, ProjectInfo, isEmployee, isManager } from "../Local";
 import Function from "../Home/Function";
 
 const ManagerDoing = () => (
@@ -17,27 +17,28 @@ const ManagerDoing = () => (
 );
 
 const EmployeeDoing = ({ projectName }) => {
-	const exitModal = () =>
-		document.getElementById("js-doing-modal").classList.add("hidden");
 	return (
 		<div
-			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center"
+			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden"
 			id="js-doing-modal">
-			<p className="ml-[12rem] mb-[-1.5rem]">Tên dự án</p>
-			<div className=" p-7 flex justify-between w-[25%]">
-				<select className="px-2 py-3 bg-[#ccc]">
-					<option value={"default"}>mã dự án</option>
-					<option value={"01"}>DA01</option>
-					<option value={"02"}>DA02</option>
-				</select>
-				<div>
-					<p className="bg-[#ccc] px-2 py-3">{projectName}</p>
-				</div>
+			<ProjectInfo projectName={"Cú ăn ba vãi đị"} />
+			<div className="ml-7">
+				<Function name={"Thêm việc"} />
+				<ol>
+					<li className="flex items-center ">
+						<p className="text-3xl">{1}: </p>
+						<TodoItem
+							listItem={"ccc"}
+							checkBox={true}
+						/>
+					</li>
+				</ol>
+				{/* Return Home Page */}
+				<BackButtons
+					hasConfirm={true}
+					exitedModal="js-doing-modal"
+				/>
 			</div>
-			<Function
-				name={"Thoát"}
-				functionRef={exitModal}
-			/>
 		</div>
 	);
 };
