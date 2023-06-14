@@ -3,6 +3,7 @@ import LoginForm from "./components/LoginForm";
 import QuanLy from "./components/QuanLy";
 import NhanVien from "./components/NhanVien";
 import Doing from "./components/Doing/Doing";
+import Completed from "./components/Completed/Completed";
 
 const App = () => {
 	return (
@@ -24,6 +25,10 @@ const App = () => {
 					path="/DangLam"
 					exact
 					element={<Doing />}></Route>
+				<Route
+					path="/HoanThanh"
+					exact
+					element={<Completed />}></Route>
 			</Routes>
 		</Router>
 	);

@@ -1,28 +1,13 @@
 import React from "react";
 import { NotLogin } from "../NhanVien";
-import NavbarItem from "../NavbarItem";
-import SignOutButton from "../SignOutButton";
 import { isEmployee, isManager } from "../Local";
+import Function from "../Home/Function";
 
 const ManagerDoing = () => (
-	<div className="h-screen">
-		<div className="flex justify-end max-h-1/50">
-			<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
-				<div className="flex  w-3/4 h-fit">
-					<NavbarItem
-						content="Đang làm"
-						Navigate={() => (window.location = "./DangLam")}
-					/>
-					<NavbarItem content="Hoàn thành" />
-					<NavbarItem
-						content="Trang Chủ"
-						Navigate={() => (window.location = "./QuanLy")}
-					/>
-				</div>
-				<SignOutButton />
-			</div>
-		</div>
-		<div className="bg-gradient-to-r from-purple-500 to-pink-500 h-[88%] w-screen p-7">
+	<div
+		className="h-screen fadein"
+		id="js-doing-modal">
+		<div className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex items-center fadein hidden h-screen w-screen p-7">
 			<TodoItem
 				listItem={"ccc"}
 				css={"w-1/2"}
@@ -31,51 +16,50 @@ const ManagerDoing = () => (
 	</div>
 );
 
-const EmployeeDoing = () => (
-	<div className="h-screen">
-		<div className="flex justify-end max-h-1/50">
-			<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
-				<div className="flex  w-3/4 h-fit">
-					<NavbarItem
-						content="Đang làm"
-						Navigate={() => (window.location = "./DangLam")}
-					/>
-					<NavbarItem content="Hoàn thành" />
-					<NavbarItem
-						content="Trang Chủ"
-						Navigate={() => (window.location = "./NhanVien")}
-					/>
+const EmployeeDoing = ({ projectName }) => {
+	const exitModal = () =>
+		document.getElementById("js-doing-modal").classList.add("hidden");
+	return (
+		<div
+			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center"
+			id="js-doing-modal">
+			<p className="ml-[12rem] mb-[-1.5rem]">Tên dự án</p>
+			<div className=" p-7 flex justify-between w-[25%]">
+				<select className="px-2 py-3 bg-[#ccc]">
+					<option value={"default"}>mã dự án</option>
+					<option value={"01"}>DA01</option>
+					<option value={"02"}>DA02</option>
+				</select>
+				<div>
+					<p className="bg-[#ccc] px-2 py-3">{projectName}</p>
 				</div>
-				<SignOutButton />
 			</div>
-		</div>
-		<div className="bg-gradient-to-r from-purple-500 to-pink-500 h-[88%] w-screen p-7">
-			<FunctionDatabase
-				item={"Thêm việc"}
-				css="ml-10 mb-6"
+			<Function
+				name={"Thoát"}
+				functionRef={exitModal}
 			/>
-			<TodoItem listItem={"ccc"} />
 		</div>
-	</div>
-);
-
+	);
+};
 const FunctionDatabase = ({ item, functionRef, css }) => (
 	<div
 		onClick={functionRef}
-		className={`flex bg-cyan-200 p-3 w-fit ${css}`}>
+		className={`flex bg-cyan-200 p-3 w-fit ${css} cursor-pointer`}>
 		{item}
 	</div>
 );
 
-const TodoItem = ({ listItem, css }) => (
+export const TodoItem = ({ listItem, css, checkBox }) => (
 	<div
 		className={`flex items-center align-middle justify-between w-4/6 ml-10 ${css}`}>
 		<div className="w-1/2 bg-gray-200 py-4 px-2 ">{listItem}</div>
-		<input
-			type="checkbox"
-			className="w-14 h-14 "
-		/>
-		{isEmployee ? (
+		{checkBox && (
+			<input
+				type="checkbox"
+				className={`w-14 h-14 `}
+			/>
+		)}
+		{isEmployee && (
 			<div className="flex ">
 				<FunctionDatabase
 					item={"Sửa"}
@@ -83,8 +67,6 @@ const TodoItem = ({ listItem, css }) => (
 				/>
 				<FunctionDatabase item={"Xoá"} />
 			</div>
-		) : (
-			<div></div>
 		)}
 	</div>
 );
@@ -93,7 +75,7 @@ const Doing = () => {
 	return isManager ? (
 		<ManagerDoing />
 	) : isEmployee ? (
-		<EmployeeDoing />
+		<EmployeeDoing projectName={"Cú ăn ba vãi đị"} />
 	) : (
 		<NotLogin />
 	);

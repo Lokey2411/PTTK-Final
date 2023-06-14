@@ -6,7 +6,7 @@ const SignOutButton = () => {
 	return (
 		<Link
 			to="../"
-			className="flex items-center h-fit px-3 py-2 w-1/2 text-right text-cyan-700">
+			className="flex items-center h-fit px-3 py-2 w-screen text-right text-cyan-700 justify-end">
 			Đăng xuất
 			<FaSignOutAlt className="m-1" />
 		</Link>
