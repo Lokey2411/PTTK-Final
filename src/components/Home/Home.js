@@ -5,6 +5,7 @@ import { isManager, openModal } from "../Local";
 import Doing from "../Doing/Doing";
 import Looking from "../Manager/Looking";
 import ConfirmProject from "../Manager/ConfirmProject";
+import Completed from "../Completed/Completed";
 
 const Manager = () => (
 	<div className="h-screen">
@@ -16,9 +17,11 @@ const Manager = () => (
 			]}
 			Function1={() => openModal("js-Looking-modal")}
 			Function2={() => openModal("js-confirm-modal")}
+			Function3={() => openModal("js-completed-info-modal")}
 		/>
 		<Looking />
 		<ConfirmProject />
+		<Completed />
 	</div>
 );
 const Employee = () => {

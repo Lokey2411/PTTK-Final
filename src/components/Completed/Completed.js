@@ -1,38 +1,37 @@
 import React from "react";
-import { isLogin, isManager } from "../Local";
-import { NotLogin } from "../NhanVien";
-import NavbarItem from "../NavbarItem";
-import SignOutButton from "../SignOutButton";
-import { TodoItem } from "../Doing/Doing";
+import { BackButtons } from "../Local";
+
+const info = [
+	["Mã dự án", "Tên dự án", "Mô tả chi tiết"],
+	["DA01", "Cú ăn ba vãi đị", "Vô địch ba cúp trong một mùa"],
+];
+
+const LineItem = ({ items }) => (
+	<div className="flex ">
+		<div className="border border-[#000] w-[25%] py-2 text-center">
+			{items[0]}
+		</div>
+		<div className="border border-[#000] w-[25%] py-2 text-center">
+			{items[1]}
+		</div>
+		<div className="border border-[#000] w-[50%] py-2 text-center">
+			{items[2]}
+		</div>
+	</div>
+);
 
 const Completed = () => {
 	return (
-		<div className="w-screen h-screen ">
-			<div className="flex justify-end max-h-1/50">
-				<div className="flex justify-evenly w-1/2 mt-1 h-fit z-10 mb-6 relative right-0">
-					<div className="flex  w-3/4 h-fit">
-						<NavbarItem
-							content="Đang làm"
-							Navigate={() => (window.location = "./DangLam")}
-						/>
-						<NavbarItem
-							content="Trang Chủ"
-							Navigate={() => (window.location = "./NhanVien")}
-						/>
-						{isManager && <NavbarItem content="Chờ duyệt" />}
-					</div>
-					<SignOutButton />
-				</div>
-			</div>
-			<div className="flex justify-center w-screen mx-auto bg-gradient-to-r  from-purple-500 to-pink-500 h-[88%] ">
-				<TodoItem
-					listItem={"ccc"}
-					checkBox={false}
-					css="w-full my-0 ml-[38%] h-fit my-5"
-				/>
+		<div
+			className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex fadein items-center justify-center hidden"
+			id="js-completed-info-modal">
+			<div className="w-[70%]">
+				<LineItem items={info[0]} />
+				<LineItem items={info[1]} />
+				<BackButtons exitedModal={"js-completed-info-modal"} />
 			</div>
 		</div>
 	);
 };
 
-export default isLogin ? Completed : NotLogin;
+export default Completed;

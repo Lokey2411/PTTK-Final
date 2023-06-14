@@ -7,7 +7,7 @@ export const openModal = (modal) =>
 	document.getElementById(modal).classList.remove("hidden");
 export const exitModal = (modal) =>
 	document.getElementById(modal).classList.add("hidden");
-export const BackButtons = ({ hasConfirm, exitedModal, pos }) => (
+export const BackButtons = ({ hasConfirm, exitedModal }) => (
 	<div
 		className={`flex justify-between mr-7 w-1/10 items-end w-[40%] absolute right-0`}>
 		<Function
