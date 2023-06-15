@@ -10,9 +10,10 @@ const EmployeeDoing = () => {
 		if (select) {
 			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
 				var option = document.createElement("option");
-				option.text = i;
-				option.value = i;
-				select.appendChild(option);
+				option.text = `DA${i}`;
+				option.value = `${i}`;
+				if (!select.innerText.includes(option.innerText))
+					select.appendChild(option);
 			}
 		}
 		select.onchange = () => {
