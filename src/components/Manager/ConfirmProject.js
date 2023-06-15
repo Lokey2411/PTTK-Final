@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BackButtons, Confirm, ProjectInfo } from "../Local";
 
 const Description = ({ order, projectDescription }) => (
@@ -12,11 +12,35 @@ const Description = ({ order, projectDescription }) => (
 );
 
 const ConfirmProject = () => {
+	const [name, setName] = useState("Tên dự án");
+
+	setTimeout(
+		useEffect(() => {
+			const select = document.getElementById("select");
+			if (select) {
+				for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+					var option = document.createElement("option");
+					option.text = i;
+					option.value = i;
+					select.appendChild(option);
+				}
+			}
+			select.onchange = () => {
+				const value = select.value;
+				if (value !== "default") {
+					setName(JSON.parse(localStorage.getItem("data"))[Number(value)].name);
+				} else {
+					setName("Tên dự án");
+				}
+			};
+		}, []),
+		1000
+	);
 	return (
 		<div
 			id="js-confirm-modal"
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
-			<ProjectInfo projectName={"Cú ăn ba vãi đị"} />
+			<ProjectInfo projectName={name} />
 			<div className="ml-7 flex justify-between items-center w-[70%]">
 				<div>
 					<Description

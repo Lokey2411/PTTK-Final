@@ -1,14 +1,31 @@
-import { child, push, ref, update } from "firebase/database";
 import Function from "./Home/Function";
-import { database } from "./Firebase";
 
+export const getLastElement = (arr) => {
+	return arr[arr.length - 1];
+};
+
+export const SelectProject = () => {
+	return (
+		<select
+			className="px-2 py-3 bg-[#ccc]"
+			id="select">
+			<option value={"default"}>mã dự án</option>
+		</select>
+	);
+};
+
+let database = JSON.parse(localStorage.getItem("data"))
+	? JSON.parse(localStorage.getItem("data"))
+	: new Array(0);
 export const isManager = JSON.parse(localStorage.getItem("isManager"));
 export const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 export const isEmployee = !isManager && isLogin;
 export const openModal = (modal) =>
 	document.getElementById(modal).classList.remove("hidden");
-export const exitModal = (modal) =>
+export const exitModal = (modal) => {
 	document.getElementById(modal).classList.add("hidden");
+	window.location.reload();
+};
 export const BackButtons = ({ hasConfirm, exitedModal }) => (
 	<div
 		className={`flex justify-between mr-7 w-1/10 items-end w-[40%] absolute right-0`}>
@@ -17,8 +34,14 @@ export const BackButtons = ({ hasConfirm, exitedModal }) => (
 			functionRef={() => {
 				exitModal(exitedModal);
 			}}
+			css="w-[48%]"
 		/>
-		{hasConfirm && <Function name={"Xác nhận"} />}
+		{hasConfirm && (
+			<Function
+				name={"Xác nhận"}
+				css="w-[48%]"
+			/>
+		)}
 	</div>
 );
 
@@ -27,13 +50,9 @@ export const ProjectInfo = ({ projectName }) => (
 		{" "}
 		<p className="ml-[12rem] mb-[-1.5rem]">Tên dự án</p>
 		<div className=" p-7 flex justify-between w-[25%]">
-			<select className="px-2 py-3 bg-[#ccc]">
-				<option value={"default"}>mã dự án</option>
-				<option value={"01"}>DA01</option>
-				<option value={"02"}>DA02</option>
-			</select>
+			<SelectProject />
 			<div>
-				<p className="bg-[#ccc] px-2 py-3">{projectName}</p>
+				<p className="bg-[#ccc] w-[200px] py-3 mx-5 px-3">{projectName}</p>
 			</div>
 		</div>
 	</div>
@@ -45,26 +64,16 @@ export const Confirm = () => (
 		<option value={false}>No</option>
 	</select>
 );
-export function writeNewPost(uid, username, picture, title, body) {
-	const db = database();
-
-	// A post entry.
-	const postData = {
-		author: username,
-		uid: uid,
-		body: body,
-		title: title,
-		starCount: 0,
-		authorPic: picture,
+export const addProject = (name, description) => {
+	if (!Number(localStorage.getItem("currentID")) === undefined) {
+		localStorage.setItem("currentID", 0);
+	}
+	const data = {
+		id: Number(localStorage.getItem("currentID")) + 1,
+		name: name,
+		description: description,
 	};
-
-	// Get a key for a new Post.
-	const newPostKey = push(child(ref(db), "posts")).key;
-
-	// Write the new post's data simultaneously in the posts list and the user's post list.
-	const updates = {};
-	updates["/posts/" + newPostKey] = postData;
-	updates["/user-posts/" + uid + "/" + newPostKey] = postData;
-
-	return update(ref(db), updates);
-}
+	database = Array.isArray(database) ? database.concat([data]) : [data];
+	localStorage.setItem("currentID", data.id);
+	localStorage.setItem("data", JSON.stringify(database));
+};

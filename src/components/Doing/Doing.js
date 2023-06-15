@@ -1,29 +1,37 @@
-import React from "react";
-import { NotLogin } from "../NhanVien";
-import { BackButtons, ProjectInfo, isEmployee, isManager } from "../Local";
+import React, { useEffect, useState } from "react";
+import { BackButtons, ProjectInfo, isEmployee } from "../Local";
 import Function from "../Home/Function";
 
-const ManagerDoing = () => (
-	<div
-		className="h-screen fadein"
-		id="js-doing-modal">
-		<div className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex items-center fadein hidden h-screen w-screen p-7">
-			<TodoItem
-				listItem={"ccc"}
-				css={"w-1/2"}
-			/>
-		</div>
-	</div>
-);
+const EmployeeDoing = () => {
+	const [name, setName] = useState("Tên dự án");
 
-const EmployeeDoing = ({ projectName }) => {
+	useEffect(() => {
+		const select = document.getElementById("select");
+		if (select) {
+			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+				var option = document.createElement("option");
+				option.text = i;
+				option.value = i;
+				select.appendChild(option);
+			}
+		}
+		select.onchange = () => {
+			const value = select.value;
+			if (value !== "default")
+				setName(JSON.parse(localStorage.getItem("data"))[Number(value)].name);
+			else setName("Tên dự án");
+		};
+	}, []);
 	return (
 		<div
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden"
 			id="js-doing-modal">
-			<ProjectInfo projectName={"Cú ăn ba vãi đị"} />
+			<ProjectInfo projectName={name} />
 			<div className="ml-7">
-				<Function name={"Thêm việc"} />
+				<Function
+					name={"Thêm việc"}
+					css="w-[30%]"
+				/>
 				<ol>
 					<li className="flex items-center ">
 						<p className="text-3xl">{1}: </p>
@@ -64,7 +72,7 @@ export const TodoItem = ({ listItem, css, checkBox }) => (
 			<div className="flex ">
 				<FunctionDatabase
 					item={"Sửa"}
-					css="mx-3"
+					css="mx-3 "
 				/>
 				<FunctionDatabase item={"Xoá"} />
 			</div>
@@ -73,13 +81,7 @@ export const TodoItem = ({ listItem, css, checkBox }) => (
 );
 
 const Doing = () => {
-	return isManager ? (
-		<ManagerDoing />
-	) : isEmployee ? (
-		<EmployeeDoing projectName={"Cú ăn ba vãi đị"} />
-	) : (
-		<NotLogin />
-	);
+	return <EmployeeDoing />;
 };
 
 export default Doing;

@@ -1,11 +1,9 @@
 import React from "react";
 import Function from "./Function";
 import "../../App.css";
+import { addProject, exitModal } from "../Local";
 
 const EmployeeAddModal = () => {
-	const exitModal = () => {
-		document.getElementById("js-EmployeeAddModal").classList.add("hidden");
-	};
 	return (
 		<div
 			id="js-EmployeeAddModal"
@@ -16,7 +14,7 @@ const EmployeeAddModal = () => {
 						<div className="w-[50%]">
 							<p>Mã dự án: </p>
 							<div className="bg-gray-300 border border-white border-solid rounded-3xl px-3 py-2 ">
-								ccc
+								{`DA${Number(localStorage.getItem("currentID"))}`}
 							</div>
 						</div>
 						<div className="w-[50%]">
@@ -24,6 +22,7 @@ const EmployeeAddModal = () => {
 							<input
 								type="text"
 								className="bg-gray-300 border border-white border-solid rounded-3xl px-3 py-2 "
+								id="name"
 							/>
 						</div>
 					</div>
@@ -31,13 +30,30 @@ const EmployeeAddModal = () => {
 					<input
 						type="text"
 						className="bg-gray-300 border border-white border-solid rounded-3xl px-3 py-10 w-[100%]"
+						id="description"
 					/>
 				</div>
 				<div>
-					<Function name={"Thêm"} />
 					<Function
+						css="text-center w-[100%]"
+						name={"Thêm"}
+						functionRef={() => {
+							const name = document.getElementById("name").value;
+							const description = document.getElementById("description").value;
+							if (name && description) {
+								alert(
+									"Thêm thành công!\nVui lòng liên hệ lại với quản lý để được xét duyệt"
+								);
+								window.location.reload();
+								addProject(name, description);
+								exitModal("js-EmployeeAddModal");
+							} else alert("Nhập đi cu");
+						}}
+					/>
+					<Function
+						css="text-center w-[100%]"
 						name={"Thoát"}
-						functionRef={exitModal}
+						functionRef={() => exitModal("js-EmployeeAddModal")}
 					/>
 				</div>
 			</div>
