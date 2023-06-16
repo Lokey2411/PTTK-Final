@@ -14,28 +14,26 @@ const Description = ({ order, projectDescription }) => (
 const ConfirmProject = () => {
 	const [name, setName] = useState("Tên dự án");
 
-	setTimeout(
-		useEffect(() => {
-			const select = document.getElementById("select");
-			if (select) {
-				for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
-					var option = document.createElement("option");
-					option.text = i;
-					option.value = i;
+	useEffect(() => {
+		const select = document.getElementById("select");
+		if (select) {
+			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+				var option = document.createElement("option");
+				option.text = `DA${i}`;
+				option.value = `${i}`;
+				if (!select.innerText.includes(option.innerText))
 					select.appendChild(option);
-				}
 			}
-			select.onchange = () => {
-				const value = select.value;
-				if (value !== "default") {
-					setName(JSON.parse(localStorage.getItem("data"))[Number(value)].name);
-				} else {
-					setName("Tên dự án");
-				}
-			};
-		}, []),
-		1000
-	);
+		}
+		select.onchange = () => {
+			const value = select.value;
+			if (value !== "default") {
+				setName(JSON.parse(localStorage.getItem("data"))[Number(value)].name);
+			} else {
+				setName("Tên dự án");
+			}
+		};
+	}, []);
 	return (
 		<div
 			id="js-confirm-modal"

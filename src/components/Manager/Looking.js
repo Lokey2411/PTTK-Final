@@ -27,7 +27,7 @@ const Looking = () => {
 				setDescription("Mô tả dự án");
 			}
 		};
-	});
+	}, []);
 
 	return (
 		<div
