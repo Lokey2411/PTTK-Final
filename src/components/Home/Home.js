@@ -31,7 +31,7 @@ const Employee = () => {
 				functions={["Thêm dự án", "Nộp công việc \n dự án"]}
 				Function1={() => openModal("js-EmployeeAddModal")}
 				Function3={() => openModal("js-doing-modal")}
-				Function2={() => openModal("js-doing-modal")}
+				Function2={() => openModal("js-completed-info-modal")}
 			/>
 			<EmployeeAddModal />
 			<Doing />
