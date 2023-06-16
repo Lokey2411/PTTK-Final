@@ -6,7 +6,6 @@ const Looking = () => {
 	const [description, setDescription] = useState("Mô tả dự án");
 	useEffect(() => {
 		const select = document.getElementById("select");
-		const confirm = document.getElementById("confirm");
 		if (select) {
 			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
 				var option = document.createElement("option");
