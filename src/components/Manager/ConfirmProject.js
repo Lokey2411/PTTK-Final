@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BackButtons, Confirm, ProjectInfo } from "../Local";
+import {
+	BackButtons,
+	Confirm,
+	ProjectInfo,
+	databaseConfirmedProject,
+} from "../Local";
 
 const Description = ({ order, projectDescription }) => (
 	<div className="flex my-5">
@@ -15,12 +20,13 @@ const ConfirmProject = () => {
 	const [name, setName] = useState("Tên dự án");
 
 	useEffect(() => {
-		const select = document.getElementById("select-confirm");
+		const select = document.getElementById("select-doing");
+		const length = JSON.parse(localStorage.getItem("dataConfirmed"))?.length;
 		if (select) {
-			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
-				option.text = `DA${i}`;
-				option.value = `${i}`;
+				option.text = `DA${databaseConfirmedProject[i].id}`;
+				option.value = databaseConfirmedProject[i].id;
 				if (!select.innerText.includes(option.innerText))
 					select.appendChild(option);
 			}
