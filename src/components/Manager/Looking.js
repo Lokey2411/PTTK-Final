@@ -25,7 +25,7 @@ const Looking = () => {
 					select.appendChild(option);
 			}
 		}
-	}, []);
+	});
 
 	return (
 		<div
