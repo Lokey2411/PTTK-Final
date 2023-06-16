@@ -96,7 +96,7 @@ export const ProjectInfo = ({ projectName, onchange, idName }) => (
 );
 export const Confirm = ({ idName }) => (
 	<select
-		className="px-5 py-8 border border-[#000]"
+		className="px-5 py-8 border border-[#000] hidden"
 		id={`confirm-${idName}`}
 		disabled>
 		<option value={"default"}>Xác nhận</option>

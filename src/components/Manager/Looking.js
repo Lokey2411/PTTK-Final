@@ -62,15 +62,12 @@ const Looking = () => {
 				hasConfirm={true}
 				exitedModal={"js-Looking-modal"}
 				confirmFunction={() => {
-					const confirm = document.getElementById(`confirm-Looking`);
 					const select = document.getElementById("select-Looking");
 
-					if (!!confirm.value) {
-						const id = getID(Number(select.value));
-						const ten = name;
-						const moTa = description;
-						addConfirmedProject(id, ten, moTa);
-					}
+					const id = getID(Number(select.value));
+					const ten = name;
+					const moTa = description;
+					addConfirmedProject(id, ten, moTa);
 					exitModal("js-Looking-modal");
 				}}
 			/>
