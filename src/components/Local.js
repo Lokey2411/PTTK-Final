@@ -4,6 +4,34 @@ export const getLastElement = (arr) => {
 	return arr[arr.length - 1];
 };
 
+let databaseConfirmedProject = JSON.parse(localStorage.getItem("dataConfirmed"))
+	? JSON.parse(localStorage.getItem("dataConfirmed"))
+	: new Array(0);
+export const getID = (number) => {
+	return JSON.parse(localStorage.getItem("data"))[number].id;
+};
+export const getName = (id) => {
+	return JSON.parse(localStorage.getItem("data"))[id].name;
+};
+export const getDescription = (id) => {
+	return JSON.parse(localStorage.getItem("data"))[id].description;
+};
+
+export const addConfirmedProject = (id, name, description) => {
+	const project = {
+		id: id,
+		name: name,
+		description: description,
+	};
+	databaseConfirmedProject = Array.isArray(databaseConfirmedProject)
+		? databaseConfirmedProject.concat([project])
+		: [project];
+	localStorage.setItem(
+		"dataConfirmed",
+		JSON.stringify(databaseConfirmedProject)
+	);
+};
+
 export const SelectProject = ({ onchange, id }) => {
 	return (
 		<select
@@ -27,7 +55,7 @@ export const exitModal = (modal) => {
 	document.getElementById(modal).classList.add("hidden");
 	window.location.reload();
 };
-export const BackButtons = ({ hasConfirm, exitedModal }) => (
+export const BackButtons = ({ hasConfirm, exitedModal, confirmFunction }) => (
 	<div
 		className={`flex justify-between mr-7 w-1/10 items-end w-[40%] absolute right-0`}>
 		<Function
@@ -41,6 +69,7 @@ export const BackButtons = ({ hasConfirm, exitedModal }) => (
 			<Function
 				name={"Xác nhận"}
 				css="w-[48%]"
+				functionRef={confirmFunction}
 			/>
 		)}
 	</div>

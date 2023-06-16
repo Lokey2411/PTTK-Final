@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BackButtons, Confirm, ProjectInfo } from "../Local";
+import {
+	BackButtons,
+	Confirm,
+	ProjectInfo,
+	addConfirmedProject,
+	exitModal,
+	getID,
+} from "../Local";
 
 const Looking = () => {
 	const [name, setName] = useState("Tên dự án");
@@ -54,6 +61,18 @@ const Looking = () => {
 			<BackButtons
 				hasConfirm={true}
 				exitedModal={"js-Looking-modal"}
+				confirmFunction={() => {
+					const confirm = document.getElementById(`confirm-Looking`);
+					const select = document.getElementById("select-Looking");
+
+					if (!!confirm.value) {
+						const id = getID(Number(select.value));
+						const ten = name;
+						const moTa = description;
+						addConfirmedProject(id, ten, moTa);
+					}
+					exitModal("js-Looking-modal");
+				}}
 			/>
 		</div>
 	);
