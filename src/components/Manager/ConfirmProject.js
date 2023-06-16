@@ -19,6 +19,7 @@ const Description = ({ order, projectDescription }) => (
 const ConfirmProject = () => {
 	const [name, setName] = useState("Tên dự án");
 
+	const [work, setWork] = useState([]);
 	useEffect(() => {
 		const select = document.getElementById("select-confirm");
 		const length = JSON.parse(localStorage.getItem("dataConfirmed"))?.length;
@@ -26,7 +27,7 @@ const ConfirmProject = () => {
 			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
 				option.text = `DA${databaseConfirmedProject[i].id}`;
-				option.value = i;
+				option.value = i + 1;
 				if (!select.innerText.includes(option.innerText))
 					select.appendChild(option);
 			}
@@ -35,7 +36,7 @@ const ConfirmProject = () => {
 	return (
 		<div
 			id="js-confirm-modal"
-			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
+			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center">
 			<ProjectInfo
 				projectName={name}
 				idName={"confirm"}
@@ -49,28 +50,29 @@ const ConfirmProject = () => {
 							JSON.parse(localStorage.getItem("dataConfirmed"))[Number(value)]
 								.name
 						);
+						setWork(JSON.parse(localStorage.getItem(`DA${value}`)));
 					} else {
-						confirm.value = "default";
-						confirm.disabled = true;
 						setName("Tên dự án");
 					}
 				}}
 			/>
 			<div className="ml-7 flex justify-between items-center w-[70%]">
-				<div>
-					<Description
-						order={1}
-						projectDescription={"C1"}
-					/>
-					<Description
-						order={2}
-						projectDescription={"EPL"}
-					/>
-					<Description
-						order={3}
-						projectDescription={"FA"}
-					/>
-				</div>
+				{work && (
+					<div>
+						<Description
+							order={1}
+							projectDescription={work[0]}
+						/>
+						<Description
+							order={2}
+							projectDescription={work[1]}
+						/>
+						<Description
+							order={3}
+							projectDescription={work[2]}
+						/>
+					</div>
+				)}
 				<Confirm idName={"confirm"} />
 			</div>
 			<BackButtons

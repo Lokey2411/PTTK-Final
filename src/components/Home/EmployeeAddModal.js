@@ -7,7 +7,7 @@ const EmployeeAddModal = () => {
 	return (
 		<div
 			id="js-EmployeeAddModal"
-			className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex items-center fadein justify-between hidden ">
+			className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex items-center fadein justify-between  hidden">
 			<div className="flex bg-gray-100 p-7 justify-around  w-4/5 m-auto items-center ">
 				<div className="p-10 w-[75%]">
 					<div className="flex justify-around w-[100%]">

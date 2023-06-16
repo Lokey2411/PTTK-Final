@@ -35,7 +35,9 @@ export const addConfirmedProject = (id, name, description) => {
 		JSON.stringify(databaseConfirmedProject)
 	);
 };
-
+export const getSelectedValue = (item) => {
+	return item.value;
+};
 export const SelectProject = ({ onchange, id }) => {
 	return (
 		<select
@@ -47,7 +49,7 @@ export const SelectProject = ({ onchange, id }) => {
 	);
 };
 
-let database = JSON.parse(localStorage.getItem("data"))
+export let database = JSON.parse(localStorage.getItem("data"))
 	? JSON.parse(localStorage.getItem("data"))
 	: new Array(0);
 export const isManager = JSON.parse(localStorage.getItem("isManager"));

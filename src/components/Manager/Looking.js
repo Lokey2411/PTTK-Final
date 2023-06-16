@@ -4,17 +4,20 @@ import {
 	Confirm,
 	ProjectInfo,
 	addConfirmedProject,
+	database,
 	exitModal,
 	getID,
+	removeArrayItem,
 } from "../Local";
 
 const Looking = () => {
 	const [name, setName] = useState("Tên dự án");
 	const [description, setDescription] = useState("Mô tả dự án");
+	const length = JSON.parse(localStorage.getItem("data")).length;
 	useEffect(() => {
 		const select = document.getElementById("select-Looking");
 		if (select) {
-			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
 				option.text = `DA${i}`;
 				option.value = `${i}`;
@@ -68,6 +71,8 @@ const Looking = () => {
 					const ten = name;
 					const moTa = description;
 					addConfirmedProject(id, ten, moTa);
+					removeArrayItem(database, database[id - 1]);
+					localStorage.setItem("data", JSON.stringify(database));
 					exitModal("js-Looking-modal");
 				}}
 			/>

@@ -25,7 +25,9 @@ const Completed = () => {
 		<div
 			className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex fadein items-center justify-center hidden"
 			id="js-completed-info-modal">
-			<div className="w-[70%]">
+			<div
+				className="w-[70%]"
+				id="completed">
 				<LineItem items={info[0]} />
 				<LineItem items={info[1]} />
 				<BackButtons exitedModal={"js-completed-info-modal"} />

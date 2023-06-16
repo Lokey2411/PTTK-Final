@@ -2,8 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import QuanLy from "./components/QuanLy";
 import NhanVien from "./components/NhanVien";
-import Doing from "./components/Doing/Doing";
-import Completed from "./components/Completed/Completed";
+import Test from "./components/Home/Test";
 
 const App = () => {
 	return (
@@ -22,13 +21,9 @@ const App = () => {
 					exact
 					element={<NhanVien />}></Route>
 				<Route
-					path="/DangLam"
+					path="/Test"
 					exact
-					element={<Doing />}></Route>
-				<Route
-					path="/HoanThanh"
-					exact
-					element={<Completed />}></Route>
+					element={<Test />}></Route>
 			</Routes>
 		</Router>
 	);
