@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { BackButtons, ProjectInfo, isEmployee } from "../Local";
+import {
+	BackButtons,
+	ProjectInfo,
+	databaseConfirmedProject,
+	isEmployee,
+} from "../Local";
 import Function from "../Home/Function";
 
 const EmployeeDoing = () => {
 	const [name, setName] = useState("Tên dự án");
 
 	useEffect(() => {
-		const select = document.getElementById("select");
+		const select = document.getElementById("select-doing");
+		const length = JSON.parse(localStorage.getItem("dataConfirmed"))?.length;
 		if (select) {
-			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
+			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
-				option.text = `DA${i}`;
-				option.value = `${i}`;
+				option.text = `DA${databaseConfirmedProject[i].id}`;
+				option.value = databaseConfirmedProject[i].id;
 				if (!select.innerText.includes(option.innerText))
 					select.appendChild(option);
 			}
@@ -23,8 +29,9 @@ const EmployeeDoing = () => {
 			id="js-doing-modal">
 			<ProjectInfo
 				projectName={name}
+				idName={"doing"}
 				onchange={() => {
-					const select = document.getElementById("select");
+					const select = document.getElementById("select-doing");
 					const value = select.value;
 					if (value !== "default")
 						setName(

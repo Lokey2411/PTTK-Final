@@ -1,10 +1,14 @@
 import Function from "./Home/Function";
 
-export const getLastElement = (arr) => {
-	return arr[arr.length - 1];
+export const removeArrayItem = (array, item) => {
+	const n = array.length;
+	for (let i = n - 1; i >= 0; i--) {
+		if (array[i] === item) array.splice(i, 1);
+	}
 };
-
-let databaseConfirmedProject = JSON.parse(localStorage.getItem("dataConfirmed"))
+export let databaseConfirmedProject = JSON.parse(
+	localStorage.getItem("dataConfirmed")
+)
 	? JSON.parse(localStorage.getItem("dataConfirmed"))
 	: new Array(0);
 export const getID = (number) => {
