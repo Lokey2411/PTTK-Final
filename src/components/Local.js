@@ -4,9 +4,10 @@ export const getLastElement = (arr) => {
 	return arr[arr.length - 1];
 };
 
-export const SelectProject = () => {
+export const SelectProject = ({ onchange }) => {
 	return (
 		<select
+			onChange={onchange}
 			className="px-2 py-3 bg-[#ccc]"
 			id="select">
 			<option value={"default"}>mã dự án</option>
@@ -45,12 +46,12 @@ export const BackButtons = ({ hasConfirm, exitedModal }) => (
 	</div>
 );
 
-export const ProjectInfo = ({ projectName }) => (
+export const ProjectInfo = ({ projectName, onchange }) => (
 	<div>
 		{" "}
 		<p className="ml-[12rem] mb-[-1.5rem]">Tên dự án</p>
 		<div className=" p-7 flex justify-between w-[25%]">
-			<SelectProject />
+			<SelectProject onchange={onchange} />
 			<div>
 				<p className="bg-[#ccc] w-[200px] py-3 mx-5 px-3">{projectName}</p>
 			</div>
@@ -58,7 +59,10 @@ export const ProjectInfo = ({ projectName }) => (
 	</div>
 );
 export const Confirm = () => (
-	<select className="px-5 py-8 border border-[#000]">
+	<select
+		className="px-5 py-8 border border-[#000]"
+		id="confirm"
+		disabled>
 		<option value={"default"}>Xác nhận</option>
 		<option value={true}>Yes</option>
 		<option value={false}>No</option>

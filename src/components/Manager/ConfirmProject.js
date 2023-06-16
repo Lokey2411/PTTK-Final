@@ -25,20 +25,25 @@ const ConfirmProject = () => {
 					select.appendChild(option);
 			}
 		}
-		select.onchange = () => {
-			const value = select.value;
-			if (value !== "default") {
-				setName(JSON.parse(localStorage.getItem("data"))[Number(value)].name);
-			} else {
-				setName("Tên dự án");
-			}
-		};
 	}, []);
 	return (
 		<div
 			id="js-confirm-modal"
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
-			<ProjectInfo projectName={name} />
+			<ProjectInfo
+				projectName={name}
+				onchange={() => {
+					const select = document.getElementById("select");
+					const value = select.value;
+					if (value !== "default") {
+						setName(
+							JSON.parse(localStorage.getItem("data"))[Number(value)].name
+						);
+					} else {
+						setName("Tên dự án");
+					}
+				}}
+			/>
 			<div className="ml-7 flex justify-between items-center w-[70%]">
 				<div>
 					<Description
