@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BackButtons, Confirm, ProjectInfo } from "../Local";
 
 const Looking = () => {
-	const idName = "Looking";
 	const [name, setName] = useState("Tên dự án");
 	const [description, setDescription] = useState("Mô tả dự án");
 	useEffect(() => {
