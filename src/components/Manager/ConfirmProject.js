@@ -5,7 +5,7 @@ const Description = ({ order, projectDescription }) => (
 	<div className="flex my-5">
 		<p className="mr-5">{order}: </p>
 		{/* Mô tả chi tiết */}
-		<p className="bg-gray-300 w-fit pr-[300px] pb-[10%] pl-3 pt-2 border border-cyan-700">
+		<p className="bg-gray-300 w-[300px] pr-[300px] pb-[10%] pl-3 pt-2 border border-cyan-700">
 			{projectDescription}
 		</p>
 	</div>
@@ -15,7 +15,7 @@ const ConfirmProject = () => {
 	const [name, setName] = useState("Tên dự án");
 
 	useEffect(() => {
-		const select = document.getElementById("select");
+		const select = document.getElementById("select-confirm");
 		if (select) {
 			for (let i = 0; i < Number(localStorage.getItem("currentID")); i++) {
 				var option = document.createElement("option");
@@ -32,14 +32,19 @@ const ConfirmProject = () => {
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
 			<ProjectInfo
 				projectName={name}
+				idName={"confirm"}
 				onchange={() => {
-					const select = document.getElementById("select");
+					const confirm = document.getElementById("confirm-confirm");
+					const select = document.getElementById("select-confirm");
 					const value = select.value;
 					if (value !== "default") {
+						confirm.disabled = false;
 						setName(
 							JSON.parse(localStorage.getItem("data"))[Number(value)].name
 						);
 					} else {
+						confirm.value = "default";
+						confirm.disabled = true;
 						setName("Tên dự án");
 					}
 				}}
@@ -59,7 +64,7 @@ const ConfirmProject = () => {
 						projectDescription={"FA"}
 					/>
 				</div>
-				<Confirm />
+				<Confirm idName={"confirm"} />
 			</div>
 			<BackButtons
 				hasConfirm={true}
