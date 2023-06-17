@@ -1,22 +1,24 @@
 import React from "react";
 import { BackButtons } from "../Local";
 
-const info = [
-	["Mã dự án", "Tên dự án", "Mô tả chi tiết"],
-	["DA01", "Cú ăn ba vãi đị", "Vô địch ba cúp trong một mùa"],
-];
+let info = [["Mã dự án", "Tên dự án", "Mô tả chi tiết"]];
+const data = JSON.parse(localStorage.getItem("dataCompleted"));
+let dataTrans = Array(0);
+
+for (let i = 0; i < data.length; i++) {
+	dataTrans.push([data[i].id, data[i].name, data[i].description]);
+}
+info = info.concat(dataTrans);
 
 const LineItem = ({ items }) => (
 	<div className="flex ">
-		<div className="border border-[#000] w-[25%] py-2 text-center">
-			{items[0]}
-		</div>
-		<div className="border border-[#000] w-[25%] py-2 text-center">
-			{items[1]}
-		</div>
-		<div className="border border-[#000] w-[50%] py-2 text-center">
-			{items[2]}
-		</div>
+		{items.map((elem) => (
+			<div
+				className="border border-[#000] w-[25%] py-2 text-center"
+				key={elem.id}>
+				{elem}
+			</div>
+		))}
 	</div>
 );
 
@@ -28,8 +30,12 @@ const Completed = () => {
 			<div
 				className="w-[70%]"
 				id="completed">
-				<LineItem items={info[0]} />
-				<LineItem items={info[1]} />
+				{info.map((elem) => (
+					<LineItem
+						items={elem}
+						key={elem.id}
+					/>
+				))}
 				<BackButtons exitedModal={"js-completed-info-modal"} />
 			</div>
 		</div>

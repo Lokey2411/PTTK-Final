@@ -6,10 +6,18 @@ export const removeArrayItem = (array, item) => {
 		if (array[i] === item) array.splice(i, 1);
 	}
 };
+export let database = JSON.parse(localStorage.getItem("data"))
+	? JSON.parse(localStorage.getItem("data"))
+	: new Array(0);
 export let databaseConfirmedProject = JSON.parse(
 	localStorage.getItem("dataConfirmed")
 )
 	? JSON.parse(localStorage.getItem("dataConfirmed"))
+	: new Array(0);
+export let databaseCompletedProject = JSON.parse(
+	localStorage.getItem("dataCompleted")
+)
+	? JSON.parse(localStorage.getItem("dataCompleted"))
 	: new Array(0);
 export const getID = (number) => {
 	return JSON.parse(localStorage.getItem("data"))[number].id;
@@ -21,20 +29,6 @@ export const getDescription = (id) => {
 	return JSON.parse(localStorage.getItem("data"))[id].description;
 };
 
-export const addConfirmedProject = (id, name, description) => {
-	const project = {
-		id: id,
-		name: name,
-		description: description,
-	};
-	databaseConfirmedProject = Array.isArray(databaseConfirmedProject)
-		? databaseConfirmedProject.concat([project])
-		: [project];
-	localStorage.setItem(
-		"dataConfirmed",
-		JSON.stringify(databaseConfirmedProject)
-	);
-};
 export const getSelectedValue = (item) => {
 	return item.value;
 };
@@ -49,9 +43,6 @@ export const SelectProject = ({ onchange, id }) => {
 	);
 };
 
-export let database = JSON.parse(localStorage.getItem("data"))
-	? JSON.parse(localStorage.getItem("data"))
-	: new Array(0);
 export const isManager = JSON.parse(localStorage.getItem("isManager"));
 export const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 export const isEmployee = !isManager && isLogin;
@@ -118,4 +109,32 @@ export const addProject = (name, description) => {
 	database = Array.isArray(database) ? database.concat([data]) : [data];
 	localStorage.setItem("currentID", data.id);
 	localStorage.setItem("data", JSON.stringify(database));
+};
+export const addConfirmedProject = (id, name, description) => {
+	const project = {
+		id: id,
+		name: name,
+		description: description,
+	};
+	databaseConfirmedProject = Array.isArray(databaseConfirmedProject)
+		? databaseConfirmedProject.concat([project])
+		: [project];
+	localStorage.setItem(
+		"dataConfirmed",
+		JSON.stringify(databaseConfirmedProject)
+	);
+};
+export const addCompletedProject = (id, name, description) => {
+	const data = {
+		id: id,
+		name: name,
+		description: description,
+	};
+	databaseConfirmedProject = Array.isArray(databaseConfirmedProject)
+		? databaseConfirmedProject.concat([data])
+		: [data];
+	localStorage.setItem(
+		"dataCompleted",
+		JSON.stringify(databaseConfirmedProject)
+	);
 };

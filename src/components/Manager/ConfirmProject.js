@@ -3,7 +3,10 @@ import {
 	BackButtons,
 	Confirm,
 	ProjectInfo,
+	addCompletedProject,
 	databaseConfirmedProject,
+	exitModal,
+	removeArrayItem,
 } from "../Local";
 
 const Description = ({ order, projectDescription }) => (
@@ -18,8 +21,8 @@ const Description = ({ order, projectDescription }) => (
 
 const ConfirmProject = () => {
 	const [name, setName] = useState("Tên dự án");
-
 	const [work, setWork] = useState([]);
+	const [description, setDescription] = useState("Mô tả dự án");
 	useEffect(() => {
 		const select = document.getElementById("select-confirm");
 		const length = JSON.parse(localStorage.getItem("dataConfirmed"))?.length;
@@ -36,7 +39,7 @@ const ConfirmProject = () => {
 	return (
 		<div
 			id="js-confirm-modal"
-			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center">
+			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
 			<ProjectInfo
 				projectName={name}
 				idName={"confirm"}
@@ -51,6 +54,10 @@ const ConfirmProject = () => {
 								.name
 						);
 						setWork(JSON.parse(localStorage.getItem(`DA${value}`)));
+						setDescription(
+							JSON.parse(localStorage.getItem("dataConfirmed"))[Number(value)]
+								.description
+						);
 					} else {
 						setName("Tên dự án");
 					}
@@ -78,6 +85,21 @@ const ConfirmProject = () => {
 			<BackButtons
 				hasConfirm={true}
 				exitedModal={"js-confirm-modal"}
+				confirmFunction={() => {
+					const select = document.getElementById("select-confirm");
+					const id = select.value;
+					if (id === "default") {
+						alert("Yêu cầu chọn dự án!");
+						return;
+					}
+					addCompletedProject(id, name, description);
+					removeArrayItem(
+						databaseConfirmedProject,
+						databaseConfirmedProject[id - 1]
+					);
+					alert("Thêm thành công\nTrở về trang chủ");
+					exitModal("js-confirm-modal");
+				}}
 			/>
 		</div>
 	);
