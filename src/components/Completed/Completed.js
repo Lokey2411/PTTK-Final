@@ -2,7 +2,9 @@ import React from "react";
 import { BackButtons } from "../Local";
 
 let info = [["Mã dự án", "Tên dự án", "Mô tả chi tiết"]];
-const data = JSON.parse(localStorage.getItem("dataCompleted"));
+const data = JSON.parse(localStorage.getItem("dataCompleted"))
+	? JSON.parse(localStorage.getItem("dataCompleted"))
+	: [];
 let dataTrans = Array(0);
 
 for (let i = 0; i < data.length; i++) {
