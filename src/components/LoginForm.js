@@ -25,24 +25,26 @@ const LoginForm = () => {
 	});
 
 	return (
-		<div className="form">
-			<label className="label">Username</label>
-			<input
-				type="text"
-				id="username"
-				className="text"
-			/>
-			<br />
-			<br />
-			<label className="label">Password</label>
-			<input
-				type="password"
-				id="password"
-				className="password"
-			/>
-			<br />
-			<br />
-			<button onClick={onValidateButtonClick}>Log in</button>
+		<div className="h-screen bg-gradient-to-r from-red-500 to-sky-500">
+			<div className="form fadein">
+				<label className="label">Username</label>
+				<input
+					type="text"
+					id="username"
+					className="text"
+				/>
+				<br />
+				<br />
+				<label className="label">Password</label>
+				<input
+					type="password"
+					id="password"
+					className="password"
+				/>
+				<br />
+				<br />
+				<button onClick={onValidateButtonClick}>Log in</button>
+			</div>
 		</div>
 	);
 };
