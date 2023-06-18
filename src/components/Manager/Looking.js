@@ -32,6 +32,7 @@ const Looking = () => {
 			id="js-Looking-modal"
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden">
 			<ProjectInfo
+				hasDefault={true}
 				projectName={name}
 				idName={"Looking"}
 				onchange={() => {

@@ -13,7 +13,9 @@ for (let i = 0; i < data.length; i++) {
 info = info.concat(dataTrans);
 
 const LineItem = ({ items }) => (
-	<div className="flex justify-center">
+	<div
+		className="flex justify-center"
+		key={items.key}>
 		{items.map((elem) => (
 			<div
 				className="border border-[#000] w-[25%] py-2 text-center"
@@ -28,7 +30,8 @@ const Completed = () => {
 	return (
 		<div
 			className="fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 flex fadein items-center justify-center hidden"
-			id="js-completed-info-modal">
+			id="js-completed-info-modal"
+			key={"abc"}>
 			<div
 				className="w-[70%] "
 				id="completed">

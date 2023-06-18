@@ -32,13 +32,13 @@ export const getDescription = (id) => {
 export const getSelectedValue = (item) => {
 	return item.value;
 };
-export const SelectProject = ({ onchange, id }) => {
+export const SelectProject = ({ onchange, id, hasDefault }) => {
 	return (
 		<select
 			onChange={onchange}
 			className="px-2 py-3 bg-[#ccc]"
 			id={`select-${id}`}>
-			<option value={"default"}>mã dự án</option>
+			{hasDefault && <option value={"default"}>mã dự án</option>}
 		</select>
 	);
 };
@@ -72,7 +72,7 @@ export const BackButtons = ({ hasConfirm, exitedModal, confirmFunction }) => (
 	</div>
 );
 
-export const ProjectInfo = ({ projectName, onchange, idName }) => (
+export const ProjectInfo = ({ projectName, onchange, idName, hasDefault }) => (
 	<div>
 		{" "}
 		<p className="ml-[12rem] mb-[-1.5rem]">Tên dự án</p>
@@ -80,6 +80,7 @@ export const ProjectInfo = ({ projectName, onchange, idName }) => (
 			<SelectProject
 				onchange={onchange}
 				id={idName}
+				hasDefault={hasDefault}
 			/>
 			<div>
 				<p className="bg-[#ccc] w-[200px] py-3 mx-5 px-3">{projectName}</p>

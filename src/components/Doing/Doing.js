@@ -19,7 +19,7 @@ const EmployeeDoing = () => {
 			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
 				option.text = `DA${databaseConfirmedProject[i].id}`;
-				option.value = databaseConfirmedProject[i].id;
+				option.value = i;
 				if (!select.innerText.includes(option.innerText))
 					select.appendChild(option);
 			}
@@ -30,6 +30,7 @@ const EmployeeDoing = () => {
 			className="h-screen fadein fixed top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-blue-500 to-white z-50 items-center hidden"
 			id="js-doing-modal">
 			<ProjectInfo
+				hasDefault={true}
 				projectName={name}
 				idName={"doing"}
 				onchange={() => {
@@ -37,9 +38,8 @@ const EmployeeDoing = () => {
 					const value = select.value;
 					if (value !== "default")
 						setName(
-							JSON.parse(localStorage.getItem("dataConfirmed"))[
-								Number(value) - 1
-							].name
+							JSON.parse(localStorage.getItem("dataConfirmed"))[Number(value)]
+								.name
 						);
 					else setName("Tên dự án");
 				}}

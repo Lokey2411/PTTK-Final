@@ -27,6 +27,12 @@ const ConfirmProject = () => {
 		const select = document.getElementById("select-confirm");
 		const length = JSON.parse(localStorage.getItem("dataConfirmed"))?.length;
 		if (select) {
+			let defaultOption = document.createElement("option");
+			defaultOption.value = "default";
+			defaultOption.text = "mã dự án";
+			if (!select.innerText.includes(defaultOption.innerText))
+				select.appendChild(defaultOption);
+			// select.innerHTML = defaultOption.innerHTML;
 			for (let i = 0; i < length; i++) {
 				var option = document.createElement("option");
 				option.text = `DA${databaseConfirmedProject[i].id}`;
@@ -43,6 +49,7 @@ const ConfirmProject = () => {
 			<ProjectInfo
 				projectName={name}
 				idName={"confirm"}
+				hasDefault={false}
 				onchange={() => {
 					const confirm = document.getElementById("confirm-confirm");
 					const select = document.getElementById("select-confirm");
@@ -50,16 +57,19 @@ const ConfirmProject = () => {
 					if (value !== "default") {
 						confirm.disabled = false;
 						setName(
-							JSON.parse(localStorage.getItem("dataConfirmed"))[Number(value)]
-								.name
+							JSON.parse(localStorage.getItem("dataConfirmed"))[
+								Number(value) - 1
+							].name
 						);
 						setWork(JSON.parse(localStorage.getItem(`DA${value}`)));
 						setDescription(
-							JSON.parse(localStorage.getItem("dataConfirmed"))[Number(value)]
-								.description
+							JSON.parse(localStorage.getItem("dataConfirmed"))[
+								Number(value) - 1
+							].description
 						);
 					} else {
 						setName("Tên dự án");
+						setWork([]);
 					}
 				}}
 			/>
@@ -87,15 +97,22 @@ const ConfirmProject = () => {
 				exitedModal={"js-confirm-modal"}
 				confirmFunction={() => {
 					const select = document.getElementById("select-confirm");
-					const id = select.value;
+					let id = select.value;
 					if (id === "default") {
 						alert("Yêu cầu chọn dự án!");
 						return;
 					}
+					id = Number(id);
 					addCompletedProject(id, name, description);
 					removeArrayItem(
 						databaseConfirmedProject,
 						databaseConfirmedProject[id - 1]
+					);
+					// remove child?
+					document.getElementById("select-confirm").selectedIndex = -1;
+					localStorage.setItem(
+						"dataConfirmed",
+						JSON.stringify(databaseConfirmedProject)
 					);
 					alert("Thêm thành công\nTrở về trang chủ");
 					exitModal("js-confirm-modal");
